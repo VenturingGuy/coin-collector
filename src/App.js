@@ -1,10 +1,8 @@
 import './App.css'
-import Buttons from './Buttons'
-import Total from './Total'
 import { useState } from 'react'
 
 const COIN_TO_CURRENCY = [0.01, 0.05, 0.10, 0.25]
-const COIN_TO_LABEL = [['penny', 'pennies'], ['nickel', 'nickels'], ['dime', 'dimes'], ['quarter', 'quarters']]
+const COIN_TO_LABEL = [['Penny', 'Pennies'], ['Nickel', 'Nickels'], ['Dime', 'Dimes'], ['Quarter', 'Quarters']]
 
 const CoinCounter = (props) => {
   const {increaseCoin, label} = props
@@ -30,11 +28,16 @@ function App() {
    )
 
   const coinCounters = coinAmount.map((_, index) => {
-    const label = `$0.${COIN_TO_CURRENCY[index]}`;
+    // toFixed ensures that the dime button is listed as $0.10 rather than $0.1
+    const label = `$${COIN_TO_CURRENCY[index].toFixed(2)}`;
     const handleIncrease = () => increaseCounter(index);
     return renderCoinCounter(label, handleIncrease);
   });
 
+  const coinTotals = coinAmount.map((amount, index) => {
+    const coinLabels = (amount === 0 || amount > 1) ? COIN_TO_LABEL[index][1] : COIN_TO_LABEL[index][0];
+    return <span>{coinLabels}: {amount} </span>
+  });
 
   const renderTotal = () => {
     const runningTotal = coinAmount.reduce((acc, val, index) => {
@@ -43,11 +46,13 @@ function App() {
     return <span>Total: ${runningTotal}</span>
   }
   
-    return (
+  return (
     <div className="App">
       <h1>Coin Collector!</h1>
+      <div>{renderTotal}</div>
+      <div>{coinTotals}</div>
+      <div>{coinCounters}</div>
       
-      <Buttons />
     </div>
   );
 }
