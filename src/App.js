@@ -1,23 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import Quantities from './Quantities';
+import Total from './Total';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Coin Collector!</h1>
+      <Total
+        total="3"
+      />
+      <Quantities
+        pennies="1"
+        nickels="2"
+        dimes="3"
+        quarters="4"
+      />
     </div>
   );
 }
