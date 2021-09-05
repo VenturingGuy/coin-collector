@@ -1,4 +1,5 @@
 import './App.css';
+import Buttons from './Buttons';
 import Quantities from './Quantities';
 import Total from './Total';
 
@@ -15,6 +16,7 @@ function App() {
         dimes="3"
         quarters="4"
       />
+      <Buttons />
     </div>
   );
 }
