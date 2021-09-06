@@ -4,15 +4,12 @@ import { useState } from 'react'
 const COIN_TO_CURRENCY = [0.01, 0.05, 0.10, 0.25]
 const COIN_TO_LABEL = [['Penny', 'Pennies'], ['Nickel', 'Nickels'], ['Dime', 'Dimes'], ['Quarter', 'Quarters']]
 
-
 function App() {
   const [coinAmount, setCoins] = useState([0, 0, 0, 0]);
 
   const CoinCounter = (props) => {
     const {increaseCoin, label} = props
-    return <button onClick={increaseCoin}>
-      {label}
-     </button>
+    return <button onClick={increaseCoin}>{label}</button>
   }
   
   const increaseCounter = (index) => {
@@ -42,19 +39,19 @@ function App() {
   });
 
   const renderTotal = () => {
+    // Note: Initializing reduce's initial value argument to 0 prevents pennies from adding $1 instead of to total
     const runningTotal = coinAmount.reduce((acc, val, index) => {
       return acc + (val * COIN_TO_CURRENCY[index])
-     })
-    return <span>Total: ${runningTotal}</span>
+     }, 0)
+    return <span>Total: ${runningTotal.toFixed(2)}</span>
   }
   
   return (
     <div className="App">
       <h1>Coin Collector!</h1>
-      <div>{renderTotal}</div>
+      <div>{renderTotal()}</div>
       <div>{coinTotals}</div>
       <div>{coinCounters}</div>
-      
     </div>
   );
 }
