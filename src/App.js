@@ -7,6 +7,7 @@ const COIN_TO_LABEL = [['Penny', 'Pennies'], ['Nickel', 'Nickels'], ['Dime', 'Di
 function App() {
   const [coinAmount, setCoins] = useState([0, 0, 0, 0]);
 
+  // button component that calls increaseCoin(the handleIncrease/increaseCounter) function on click
   const CoinCounter = (props) => {
     const {increaseCoin, label} = props
     return <button onClick={increaseCoin}>{label}</button>
@@ -39,7 +40,7 @@ function App() {
   });
 
   const renderTotal = () => {
-    // Note: Initializing reduce's initial value argument to 0 prevents pennies from adding $1 instead of to total
+    // Note: Initializing reduce's initial value argument to 0 prevents pennies from adding $1 instead of 1 cent to total
     const runningTotal = coinAmount.reduce((acc, val, index) => {
       return acc + (val * COIN_TO_CURRENCY[index])
      }, 0)
